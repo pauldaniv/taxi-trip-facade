@@ -1,1 +1,16 @@
+server.port: ${PORT:8080}
 
+spring:
+  kafka:
+    bootstrap-servers: ${KAFKA_HOSTNAME:kafka.kafka}
+
+    producer:
+      key-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      transaction-id-prefix: yt.
+      properties:
+        enable.idempotence: true
+
+    consumer:
+      isolation-level: read_committed
+      enable-auto-commit: false
