@@ -1,20 +1,22 @@
 package com.pauldaniv.promotion.yellowtaxi.facade.controler;
 
-import com.pauldaniv.promotion.yellowtaxi.model.TripResponse;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.pauldaniv.promotion.yellowtaxi.facade.service.TestProducer;
+import com.pauldaniv.promotion.yellowtaxi.model.TripRequest;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/v1")
 public class TestController {
+    private final TestProducer producer;
 
-    @GetMapping("/trips")
-    public List<TripResponse> getResponse() {
-        return List.of(TripResponse.builder()
-                .id("test")
-                .build());
+    @PostMapping("/trips")
+    public TripRequest getResponse(@RequestBody TripRequest tripRequest) {
+        producer.push(tripRequest);
+        return tripRequest;
     }
 }
