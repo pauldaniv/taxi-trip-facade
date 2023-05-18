@@ -70,16 +70,15 @@ subprojects {
 			}
 		}
 
+		val sourcesJar by tasks.creating(Jar::class) {
+			archiveClassifier.set("sources")
+			from(sourceSets["main"].allSource)
+		}
+
 		publications {
 			create<MavenPublication>("maven") {
-				versionMapping {
-					usage("java-api") {
-						fromResolutionOf("runtimeClasspath")
-					}
-					usage("java-runtime") {
-						fromResolutionResult()
-					}
-				}
+				from(components["java"])
+				artifact(sourcesJar)
 			}
 		}
 	}
