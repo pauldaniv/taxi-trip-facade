@@ -10,11 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class TestProducer {
+public class TaxiTripService {
     private final KafkaTemplate<String, Object> template;
 
     @Transactional
-    public void push(TripRequest data) {
+    public void pushTripToQueue(TripRequest data) {
         template.send("testTopic", data).thenAccept(it -> {
             log.info("msg=message_sent");
         }).exceptionally(ex -> {
