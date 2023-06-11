@@ -7,5 +7,4 @@ import lombok.Data;
 @Builder
 public class TripResponse {
     private String id;
-    private Long distance;
 }

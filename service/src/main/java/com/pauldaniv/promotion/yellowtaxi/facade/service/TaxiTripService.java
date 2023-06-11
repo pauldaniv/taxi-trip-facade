@@ -15,8 +15,12 @@ public class TaxiTripService {
 
     @Transactional
     public void pushTripToQueue(TripRequest data) {
+        final int dropOffMonth = data.getTPepDropOffDatetime().getMonthValue();
+        final int dropOffDay = data.getTPepDropOffDatetime().getDayOfMonth();
+        data.setDropOffMonth(dropOffMonth);
+        data.setDropOffDay(dropOffDay);
         template.send("testTopic", data).thenAccept(it -> {
-            log.info("msg=message_sent");
+            log.info("msg=message_sent value={}", it.getProducerRecord().value());
         }).exceptionally(ex -> {
             log.error("msg=error_occurred");
             return null;
