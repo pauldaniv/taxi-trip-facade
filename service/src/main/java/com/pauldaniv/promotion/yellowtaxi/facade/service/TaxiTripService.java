@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class TaxiTripService {
-    private final KafkaTemplate<String, Object> template;
+    private final KafkaTemplate<String, TripRequest> template;
 
     @Transactional
     public void pushTripToQueue(TripRequest data) {
