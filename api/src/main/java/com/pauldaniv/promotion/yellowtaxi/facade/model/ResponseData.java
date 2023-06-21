@@ -1,4 +1,4 @@
-package com.pauldaniv.promotion.yellowtaxi.model;
+package com.pauldaniv.promotion.yellowtaxi.facade.model;
 
 import lombok.*;
 

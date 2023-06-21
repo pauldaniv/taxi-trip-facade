@@ -1,6 +1,6 @@
 package com.pauldaniv.promotion.yellowtaxi.facade.service;
 
-import com.pauldaniv.promotion.yellowtaxi.model.TripRequest;
+import com.pauldaniv.promotion.yellowtaxi.facade.model.TripRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -14,15 +14,15 @@ public class TaxiTripService {
     private final KafkaTemplate<String, TripRequest> template;
 
     @Transactional
-    public void pushTripToQueue(TripRequest data) {
+    public void pushTripToQueue(final TripRequest data) {
         final int dropOffMonth = data.getTPepDropOffDatetime().getMonthValue();
         final int dropOffDay = data.getTPepDropOffDatetime().getDayOfMonth();
         data.setDropOffMonth(dropOffMonth);
         data.setDropOffDay(dropOffDay);
-        template.send("testTopic", data).thenAccept(it -> {
+        template.send("taxi-trips", data).thenAccept(it -> {
             log.info("msg=message_sent value={}", it.getProducerRecord().value());
-        }).exceptionally(ex -> {
-            log.error("msg=error_occurred");
+        }).exceptionally(d -> {
+            log.error("msg=error_occurred errorMessage={}", d.getMessage(), d);
             return null;
         });
     }

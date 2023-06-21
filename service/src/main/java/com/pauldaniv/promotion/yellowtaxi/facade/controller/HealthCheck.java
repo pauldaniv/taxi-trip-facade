@@ -1,4 +1,4 @@
-package com.pauldaniv.promotion.yellowtaxi.facade.controler;
+package com.pauldaniv.promotion.yellowtaxi.facade.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

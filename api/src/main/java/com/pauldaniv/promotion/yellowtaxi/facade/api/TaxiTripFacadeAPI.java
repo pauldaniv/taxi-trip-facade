@@ -1,8 +1,8 @@
-package com.pauldaniv.promotion.yellowtaxi.facade;
+package com.pauldaniv.promotion.yellowtaxi.facade.api;
 
-import com.pauldaniv.promotion.yellowtaxi.model.ResponseData;
-import com.pauldaniv.promotion.yellowtaxi.model.TotalsResponse;
-import com.pauldaniv.promotion.yellowtaxi.model.TripRequest;
+import com.pauldaniv.promotion.yellowtaxi.facade.model.ResponseData;
+import com.pauldaniv.promotion.yellowtaxi.facade.model.TotalsResponse;
+import com.pauldaniv.promotion.yellowtaxi.facade.model.TripRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
