@@ -9,17 +9,21 @@ import redis.clients.jedis.JedisPooled;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class StatsService {
+
     private final JedisPooled jedisPooled;
-//        @Cacheable("itemCache")
-    public TotalsResponse calculateTripTotals(final Integer year, final Integer month, final Integer day) {
+
+    public TotalsResponse calculateTripTotals(final Integer month, final Integer day) {
+        final String val = jedisPooled.get(String.format("%s/%s", month, day));
+        final BigDecimal total = Optional.ofNullable(val).map(BigDecimal::new).orElse(BigDecimal.ZERO);
         return TotalsResponse.builder()
-                .total(new BigDecimal("142.12"))
-                .date(LocalDate.of(year, month, day))
+                .total(total)
+                .date(LocalDate.of(2018, month, day))
                 .build();
     }
 }

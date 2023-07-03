@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import redis.clients.jedis.JedisPooled;
 
 @Configuration
-//@EnableCaching
 public class RedisConfig {
 
     @Value("${redis.host}")

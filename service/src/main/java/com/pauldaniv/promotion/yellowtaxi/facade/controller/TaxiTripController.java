@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
@@ -30,7 +31,7 @@ public class TaxiTripController {
     }
 
     @GetMapping("/trips/totals")
-    public TotalsResponse stats(final Integer year, final Integer month, final Integer day) {
-        return statsService.calculateTripTotals(year, month, day);
+    public TotalsResponse stats(@RequestParam("month") final Integer month, @RequestParam("day") final Integer day) {
+        return statsService.calculateTripTotals(month, day);
     }
 }
