@@ -1,6 +1,14 @@
 server.port: ${PORT:8081}
 
 spring:
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://idp.example.com/issuer
+
+
   kafka:
     bootstrap-servers: ${KAFKA_HOSTNAME:localhost}:${KAFKA_PORT:9092}
 
@@ -19,3 +27,4 @@ redis:
   host: ${REDIS_HOSTNAME:localhost}
   port: ${REDIS_PORT:6379}
 
+app.jwt.secret: 0793wvjzTy9ckZgtNGg6z7NJOw7uN4/bdslDkWLhh/E7SrIqyhuJBbzhWfiL9X0dHn1LIG6FoUyGDBZV1DYW0w9nEh7oLCdhmKCAR6dSc5fjLtCrs2br44kzF8hOtz4V
