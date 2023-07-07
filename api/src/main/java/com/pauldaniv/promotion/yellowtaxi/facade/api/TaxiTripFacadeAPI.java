@@ -1,5 +1,7 @@
 package com.pauldaniv.promotion.yellowtaxi.facade.api;
 
+import com.pauldaniv.promotion.yellowtaxi.facade.model.AuthRequest;
+import com.pauldaniv.promotion.yellowtaxi.facade.model.AuthResponse;
 import com.pauldaniv.promotion.yellowtaxi.facade.model.ResponseData;
 import com.pauldaniv.promotion.yellowtaxi.facade.model.TotalsResponse;
 import com.pauldaniv.promotion.yellowtaxi.facade.model.TripRequest;
@@ -17,4 +19,7 @@ public interface TaxiTripFacadeAPI {
     Call<TotalsResponse> getTotals(@Query("year") Integer year,
                                    @Query("month") Integer month,
                                    @Query("day") Integer day);
+
+    @POST("/v1/auth/login")
+    Call<AuthResponse> login(@Body AuthRequest authRequest);
 }

@@ -51,7 +51,7 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(config -> {
-                    config.requestMatchers("/auth/login", "/logout").permitAll();
+                    config.requestMatchers("/v1/auth/login", "/logout").permitAll();
                     config.anyRequest().authenticated();
                 })
                 .logout(config -> {
