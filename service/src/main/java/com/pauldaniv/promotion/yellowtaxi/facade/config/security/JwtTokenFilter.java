@@ -2,6 +2,7 @@ package com.pauldaniv.promotion.yellowtaxi.facade.config.security;
 
 
 import com.pauldaniv.promotion.yellowtaxi.facade.model.User;
+import com.pauldaniv.promotion.yellowtaxi.facade.service.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ import java.io.IOException;
 public class JwtTokenFilter extends OncePerRequestFilter {
 
     private final JwtUtils jwtUtil;
+    private final UserService userService;
 
     @Override
     protected void doFilterInternal(final HttpServletRequest request,
@@ -56,14 +58,20 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
     private String getAccessToken(HttpServletRequest request) {
         String header = request.getHeader("Authorization");
-        return header.split(" ")[1].trim();
+        final String[] parts = header.split(" ");
+        if (parts.length > 1) {
+            return parts[1].trim();
+        } else {
+            return null;
+        }
     }
 
     private void setAuthenticationContext(String token, HttpServletRequest request) {
         UserDetails userDetails = getUserDetails(token);
 
         UsernamePasswordAuthenticationToken
-                authentication = new UsernamePasswordAuthenticationToken(userDetails, null, null);
+                authentication = new UsernamePasswordAuthenticationToken(userDetails, null,
+                userDetails.getAuthorities());
 
         authentication.setDetails(
                 new WebAuthenticationDetailsSource().buildDetails(request));
@@ -71,13 +79,12 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
-    private UserDetails getUserDetails(String token) {
-        User userDetails = new User();
+    private User getUserDetails(String token) {
         String[] jwtSubject = jwtUtil.getSubject(token).split(",");
 
-        userDetails.setId(jwtSubject[0]);
-        userDetails.setEmail(jwtSubject[1]);
-
-        return userDetails;
+        final String userEmail = jwtSubject[1];
+        final User user = userService.getUsers().get(userEmail);
+        user.setId(jwtSubject[0]);
+        return user;
     }
 }

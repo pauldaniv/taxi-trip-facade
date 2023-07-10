@@ -30,7 +30,7 @@ public class StatsServiceTest {
 
     @Test
     void getsStats() {
-        assertThat(statsService.calculateTripTotals(2, 2)).isNotNull();
+        assertThat(statsService.calculateTripTotals(2018, 2, 2)).isNotNull();
     }
 
     @AfterMethod

@@ -22,4 +22,7 @@ public interface TaxiTripFacadeAPI {
 
     @POST("/v1/auth/login")
     Call<AuthResponse> login(@Body AuthRequest authRequest);
+
+    @GET("/v1/identity")
+    Call<AuthResponse> identity();
 }

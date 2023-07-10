@@ -30,12 +30,10 @@ public class SecurityConfig {
     private final JwtTokenFilter jwtTokenFilter;
     private final UserService userService;
 
-
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> Optional.ofNullable(userService.getUsers().get(username))
-                .orElseThrow(
-                        () -> new UsernameNotFoundException("User " + username + " not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("User " + username + " not found"));
     }
 
     @Bean
@@ -44,14 +42,15 @@ public class SecurityConfig {
         return authConfig.getAuthenticationManager();
     }
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(config -> {
-                    config.requestMatchers("/v1/auth/login", "/logout").permitAll();
+                    config.requestMatchers("/v1/auth/login", "/logout", "/v1/health_check")
+                            .permitAll();
+                    config.requestMatchers("/v1/trips/totals").hasAnyAuthority("ADMIN", "ANALYST");
                     config.anyRequest().authenticated();
                 })
                 .logout(config -> {
@@ -60,16 +59,6 @@ public class SecurityConfig {
                 })
                 .sessionManagement(config -> {
                     config.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-                })
-                .exceptionHandling(config -> {
-                    config.authenticationEntryPoint(
-                            (request, response, ex) -> {
-                                response.sendError(
-                                        HttpServletResponse.SC_UNAUTHORIZED,
-                                        ex.getMessage()
-                                );
-                            }
-                    );
                 })
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

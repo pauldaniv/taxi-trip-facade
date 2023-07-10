@@ -26,12 +26,13 @@ public class TaxiTripController {
     @PostMapping("/trips")
     public ResponseEntity<ResponseData> getResponse(@RequestBody TripRequest tripRequest) {
         producer.pushTripToQueue(tripRequest);
-        final ResponseData responseData = new ResponseData();
         return ResponseEntity.ok(ResponseData.builder().message("ok").build());
     }
 
     @GetMapping("/trips/totals")
-    public TotalsResponse stats(@RequestParam("month") final Integer month, @RequestParam("day") final Integer day) {
-        return statsService.calculateTripTotals(month, day);
+    public TotalsResponse stats(@RequestParam("year") final Integer year,
+                                @RequestParam("month") final Integer month,
+                                @RequestParam(value = "day", defaultValue = "-1") final Integer day) {
+        return statsService.calculateTripTotals(year, month, day);
     }
 }

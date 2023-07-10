@@ -24,4 +24,9 @@ public class TaxiTripFacadeAPIMock implements TaxiTripFacadeAPI {
     public Call<AuthResponse> login(AuthRequest authRequest) {
         throw new UnsupportedOperationException("Not implemented yet");
     }
+
+    @Override
+    public Call<AuthResponse> identity() {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
 }

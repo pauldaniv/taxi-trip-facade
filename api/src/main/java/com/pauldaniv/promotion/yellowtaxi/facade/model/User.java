@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Set;
 
 @Data
 @Builder
@@ -15,14 +16,10 @@ import java.util.Collection;
 @AllArgsConstructor
 public class User implements UserDetails {
 
-    // rest of the code not shown...
     private String id;
     private String email;
     private String password;
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
+    private Set<UserRole> authorities;
 
     @Override
     public String getUsername() {

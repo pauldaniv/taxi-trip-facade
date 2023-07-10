@@ -15,8 +15,10 @@ public class TaxiTripService {
 
     @Transactional
     public void pushTripToQueue(final TripRequest data) {
+        final int dropOffYear = data.getTPepDropOffDatetime().getYear();
         final int dropOffMonth = data.getTPepDropOffDatetime().getMonthValue();
         final int dropOffDay = data.getTPepDropOffDatetime().getDayOfMonth();
+        data.setDropOffYear(dropOffYear);
         data.setDropOffMonth(dropOffMonth);
         data.setDropOffDay(dropOffDay);
         template.send("taxi-trips", data).thenAccept(it -> {

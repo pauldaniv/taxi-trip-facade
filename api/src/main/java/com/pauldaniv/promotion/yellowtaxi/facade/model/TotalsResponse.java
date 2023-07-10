@@ -14,5 +14,5 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class TotalsResponse {
     private BigDecimal total;
-    private LocalDate date;
+    private String date;
 }

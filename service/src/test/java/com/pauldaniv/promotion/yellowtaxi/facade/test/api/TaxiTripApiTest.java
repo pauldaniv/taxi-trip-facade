@@ -76,13 +76,15 @@ public class TaxiTripApiTest {
 
 
         final LocalDate now = LocalDate.now();
+        final int year = now.getYear();
         final int month = now.getMonthValue();
         final int dayOfMonth = now.getDayOfMonth();
 
-        when(statsService.calculateTripTotals(month, dayOfMonth))
+        when(statsService.calculateTripTotals(year, month, dayOfMonth))
                 .thenReturn(TotalsResponse.builder().total(new BigDecimal("142.2")).build());
 
         mockMvc.perform(get("/v1/trips/totals")
+                        .param("year", String.valueOf(year))
                         .param("month", String.valueOf(month))
                         .param("day", String.valueOf(dayOfMonth))
                         .content(new ObjectMapper().writeValueAsBytes(requestBody))
@@ -90,6 +92,6 @@ public class TaxiTripApiTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("42")));
 
-        verify(statsService).calculateTripTotals(month, dayOfMonth);
+        verify(statsService).calculateTripTotals(year, month, dayOfMonth);
     }
 }

@@ -21,6 +21,7 @@ public class TripRequest {
     private Long paymentTypeId;
     private LocalDateTime tPepPickupDatetime;
     private LocalDateTime tPepDropOffDatetime;
+    private Integer dropOffYear;
     private Integer dropOffMonth;
     private Integer dropOffDay;
     private Integer passengerCount;

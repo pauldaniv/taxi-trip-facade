@@ -64,7 +64,7 @@ public class TaxiTripFacadeAPITest {
     public void getsTotal() throws IOException {
         final TotalsResponse totalsResponse = new TotalsResponse();
         totalsResponse.setTotal(new BigDecimal("123.4"));
-        totalsResponse.setDate(LocalDate.of(2023, 6, 18));
+        totalsResponse.setDate(LocalDate.of(2023, 6, 18).toString());
 
         Call<TotalsResponse> mockResponseCall = mock(Call.class);
 
