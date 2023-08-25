@@ -4,7 +4,6 @@ import com.pauldaniv.promotion.yellowtaxi.facade.model.AuthRequest;
 import com.pauldaniv.promotion.yellowtaxi.facade.model.AuthResponse;
 import com.pauldaniv.promotion.yellowtaxi.facade.model.ResponseData;
 import com.pauldaniv.promotion.yellowtaxi.facade.model.TotalsResponse;
-import com.pauldaniv.promotion.yellowtaxi.facade.model.TripRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;

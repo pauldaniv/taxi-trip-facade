@@ -3,7 +3,6 @@ package com.pauldaniv.promotion.yellowtaxi.facade;
 import com.pauldaniv.promotion.yellowtaxi.facade.api.TaxiTripFacadeAPI;
 import com.pauldaniv.promotion.yellowtaxi.facade.model.ResponseData;
 import com.pauldaniv.promotion.yellowtaxi.facade.model.TotalsResponse;
-import com.pauldaniv.promotion.yellowtaxi.facade.model.TripRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;

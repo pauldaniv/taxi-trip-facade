@@ -1,7 +1,7 @@
 package com.pauldaniv.promotion.yellowtaxi.facade.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pauldaniv.promotion.yellowtaxi.facade.model.TripRequest;
+import com.pauldaniv.promotion.yellowtaxi.model.TaxiTrip;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,8 +22,8 @@ public class KafkaConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, TripRequest> orderKafkaTemplate(final ObjectMapper objectMapper,
-                                                                 final DefaultKafkaProducerFactory<String, TripRequest> producerFactory) {
+    public KafkaTemplate<String, TaxiTrip> orderKafkaTemplate(final ObjectMapper objectMapper,
+                                                              final DefaultKafkaProducerFactory<String, TaxiTrip> producerFactory) {
         producerFactory.setValueSerializer(new JsonSerializer<>(objectMapper));
 
         return new KafkaTemplate<>(producerFactory);

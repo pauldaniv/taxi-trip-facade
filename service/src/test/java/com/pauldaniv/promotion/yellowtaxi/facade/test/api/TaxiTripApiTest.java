@@ -3,14 +3,12 @@ package com.pauldaniv.promotion.yellowtaxi.facade.test.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pauldaniv.promotion.yellowtaxi.facade.controller.TaxiTripController;
 import com.pauldaniv.promotion.yellowtaxi.facade.model.TotalsResponse;
-import com.pauldaniv.promotion.yellowtaxi.facade.model.TripRequest;
 import com.pauldaniv.promotion.yellowtaxi.facade.service.StatsService;
 import com.pauldaniv.promotion.yellowtaxi.facade.service.TaxiTripService;
 import lombok.extern.slf4j.Slf4j;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -19,8 +17,6 @@ import org.testng.annotations.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.Month;
-import java.util.Map;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.any;

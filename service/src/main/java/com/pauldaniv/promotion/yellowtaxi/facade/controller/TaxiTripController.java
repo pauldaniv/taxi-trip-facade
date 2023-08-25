@@ -2,10 +2,10 @@ package com.pauldaniv.promotion.yellowtaxi.facade.controller;
 
 import com.pauldaniv.promotion.yellowtaxi.facade.model.ResponseData;
 import com.pauldaniv.promotion.yellowtaxi.facade.model.TotalsResponse;
-import com.pauldaniv.promotion.yellowtaxi.facade.model.TripRequest;
 import com.pauldaniv.promotion.yellowtaxi.facade.service.StatsService;
 import com.pauldaniv.promotion.yellowtaxi.facade.service.TaxiTripService;
 
+import com.pauldaniv.promotion.yellowtaxi.model.TaxiTrip;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +24,7 @@ public class TaxiTripController {
     private final StatsService statsService;
 
     @PostMapping("/trips")
-    public ResponseEntity<ResponseData> getResponse(@RequestBody TripRequest tripRequest) {
+    public ResponseEntity<ResponseData> getResponse(@RequestBody TaxiTrip tripRequest) {
         producer.pushTripToQueue(tripRequest);
         return ResponseEntity.ok(ResponseData.builder().message("ok").build());
     }

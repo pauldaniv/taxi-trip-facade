@@ -1,6 +1,6 @@
 package com.pauldaniv.promotion.yellowtaxi.facade.service;
 
-import com.pauldaniv.promotion.yellowtaxi.facade.model.TripRequest;
+import com.pauldaniv.promotion.yellowtaxi.model.TaxiTrip;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -11,10 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class TaxiTripService {
-    private final KafkaTemplate<String, TripRequest> template;
+    private final KafkaTemplate<String, TaxiTrip> template;
 
     @Transactional
-    public void pushTripToQueue(final TripRequest data) {
+    public void pushTripToQueue(final TaxiTrip data) {
         final int dropOffYear = data.getTPepDropOffDatetime().getYear();
         final int dropOffMonth = data.getTPepDropOffDatetime().getMonthValue();
         final int dropOffDay = data.getTPepDropOffDatetime().getDayOfMonth();

@@ -16,7 +16,6 @@ public class UserService {
 
     private Map<String, User> users = new HashMap<>();
 
-    @Autowired
     public UserService() {
         users.put("pavlo.daniv@sombrainc.com", User.builder()
                 .id("pdaniv")

@@ -1,6 +1,5 @@
 package com.pauldaniv.promotion.yellowtaxi.facade.test.service;
 
-import com.pauldaniv.promotion.yellowtaxi.facade.model.TripRequest;
 import com.pauldaniv.promotion.yellowtaxi.facade.service.TaxiTripService;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.mockito.Mock;
