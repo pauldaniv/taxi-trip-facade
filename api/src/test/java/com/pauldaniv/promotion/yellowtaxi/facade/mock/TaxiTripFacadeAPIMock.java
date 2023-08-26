@@ -5,12 +5,13 @@ import com.pauldaniv.promotion.yellowtaxi.facade.model.AuthRequest;
 import com.pauldaniv.promotion.yellowtaxi.facade.model.AuthResponse;
 import com.pauldaniv.promotion.yellowtaxi.facade.model.ResponseData;
 import com.pauldaniv.promotion.yellowtaxi.facade.model.TotalsResponse;
+import com.pauldaniv.promotion.yellowtaxi.model.TaxiTrip;
 import retrofit2.Call;
 
 public class TaxiTripFacadeAPIMock implements TaxiTripFacadeAPI {
 
     @Override
-    public Call<ResponseData> pushTaxiTrip(TripRequest tripRequest) {
+    public Call<ResponseData> pushTaxiTrip(TaxiTrip tripRequest) {
         throw new UnsupportedOperationException("Not implemented yet");
     }
 

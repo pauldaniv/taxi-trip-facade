@@ -3,6 +3,7 @@ package com.pauldaniv.promotion.yellowtaxi.facade;
 import com.pauldaniv.promotion.yellowtaxi.facade.api.TaxiTripFacadeAPI;
 import com.pauldaniv.promotion.yellowtaxi.facade.model.ResponseData;
 import com.pauldaniv.promotion.yellowtaxi.facade.model.TotalsResponse;
+import com.pauldaniv.promotion.yellowtaxi.model.TaxiTrip;
 import lombok.extern.slf4j.Slf4j;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
@@ -50,7 +51,7 @@ public class TaxiTripFacadeAPITest {
         when(taxiTripFacadeAPI.pushTaxiTrip(ArgumentMatchers.any()))
                 .thenReturn(mockResponseCall);
 
-        final TripRequest tripRequest = new TripRequest();
+        final TaxiTrip tripRequest = TaxiTrip.builder().build();
         final Response<ResponseData> response = taxiTripFacadeAPI.pushTaxiTrip(tripRequest).execute();
 
         assertThat(response.body()).isNotNull();
@@ -72,7 +73,7 @@ public class TaxiTripFacadeAPITest {
         when(taxiTripFacadeAPI.getTotals(anyInt(), anyInt(), anyInt()))
                 .thenReturn(mockResponseCall);
 
-        final TripRequest tripRequest = new TripRequest();
+        final TaxiTrip tripRequest = TaxiTrip.builder().build();
         final Response<TotalsResponse> response = taxiTripFacadeAPI.getTotals(2023, 6, 18).execute();
         final TotalsResponse responseBody = response.body();
         assertThat(responseBody).isNotNull();

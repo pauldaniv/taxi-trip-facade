@@ -5,6 +5,7 @@ import com.pauldaniv.promotion.yellowtaxi.facade.controller.TaxiTripController;
 import com.pauldaniv.promotion.yellowtaxi.facade.model.TotalsResponse;
 import com.pauldaniv.promotion.yellowtaxi.facade.service.StatsService;
 import com.pauldaniv.promotion.yellowtaxi.facade.service.TaxiTripService;
+import com.pauldaniv.promotion.yellowtaxi.model.TaxiTrip;
 import lombok.extern.slf4j.Slf4j;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -49,7 +50,7 @@ public class TaxiTripApiTest {
 
     @Test
     public void postsTrip() throws Exception {
-        final TripRequest requestBody = TripRequest.builder()
+        final TaxiTrip requestBody = TaxiTrip.builder()
                 .doLocationId(123)
                 .tripDistance(123.0D)
                 .build();
@@ -65,7 +66,7 @@ public class TaxiTripApiTest {
 
     @Test
     public void getsStatus() throws Exception {
-        final TripRequest requestBody = TripRequest.builder()
+        final TaxiTrip requestBody = TaxiTrip.builder()
                 .doLocationId(123)
                 .tripDistance(123.0D)
                 .build();

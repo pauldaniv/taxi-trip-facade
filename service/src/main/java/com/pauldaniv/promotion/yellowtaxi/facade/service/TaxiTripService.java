@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoField;
 
 @Slf4j
 @Service
@@ -17,7 +18,7 @@ public class TaxiTripService {
 
     @Transactional
     public void pushTripToQueue(final TaxiTrip data) {
-        final LocalDateTime dropOffDatetime = LocalDateTime.from(data.getTPepDropOffDatetime());
+        final LocalDateTime dropOffDatetime = data.getTPepDropOffDatetime();
         final int dropOffYear = dropOffDatetime.getYear();
         final int dropOffMonth = dropOffDatetime.getMonthValue();
         final int dropOffDay = dropOffDatetime.getDayOfMonth();

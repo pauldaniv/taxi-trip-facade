@@ -3,7 +3,6 @@ package com.pauldaniv.promotion.yellowtaxi.facade.service;
 import com.pauldaniv.promotion.yellowtaxi.facade.model.User;
 import com.pauldaniv.promotion.yellowtaxi.facade.model.UserRole;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

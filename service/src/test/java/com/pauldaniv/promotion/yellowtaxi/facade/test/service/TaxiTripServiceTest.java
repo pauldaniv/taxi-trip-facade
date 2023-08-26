@@ -1,6 +1,7 @@
 package com.pauldaniv.promotion.yellowtaxi.facade.test.service;
 
 import com.pauldaniv.promotion.yellowtaxi.facade.service.TaxiTripService;
+import com.pauldaniv.promotion.yellowtaxi.model.TaxiTrip;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -11,6 +12,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.concurrent.CompletableFuture;
 
@@ -24,7 +26,7 @@ import static org.mockito.Mockito.when;
 public class TaxiTripServiceTest {
 
     @Mock
-    private KafkaTemplate<String, TripRequest> template;
+    private KafkaTemplate<String, TaxiTrip> template;
 
     private TaxiTripService taxiTripService;
 
@@ -36,13 +38,13 @@ public class TaxiTripServiceTest {
 
     @Test
     void pushesTripToQueue() {
-        final TripRequest value = TripRequest.builder()
+        final TaxiTrip value = TaxiTrip.builder()
                 .tPepDropOffDatetime(LocalDateTime.now())
                 .build();
 
-        final var sendResultCompletableFuture = new CompletableFuture<SendResult<String, TripRequest>>();
+        final var sendResultCompletableFuture = new CompletableFuture<SendResult<String, TaxiTrip>>();
 
-        final var producerRecord = spy(new ProducerRecord<String, TripRequest>("taxi-trips", value));
+        final var producerRecord = spy(new ProducerRecord<String, TaxiTrip>("taxi-trips", value));
 
         final var sendResult = mock(SendResult.class);
 
@@ -67,7 +69,7 @@ public class TaxiTripServiceTest {
                 .thenReturn(exceptionally);
 
 
-        final TripRequest tripRequest = TripRequest.builder()
+        final TaxiTrip tripRequest = TaxiTrip.builder()
                 .tPepDropOffDatetime(LocalDateTime.now())
                 .build();
         taxiTripService.pushTripToQueue(tripRequest);
@@ -78,13 +80,13 @@ public class TaxiTripServiceTest {
 
     @Test
     void pushesTripToQueueExceptionally() {
-        final TripRequest value = TripRequest.builder()
+        final TaxiTrip value = TaxiTrip.builder()
                 .tPepDropOffDatetime(LocalDateTime.now())
                 .build();
 
-        final var sendResultCompletableFuture = new CompletableFuture<SendResult<String, TripRequest>>();
+        final var sendResultCompletableFuture = new CompletableFuture<SendResult<String, TaxiTrip>>();
 
-        final var producerRecord = spy(new ProducerRecord<String, TripRequest>("taxi-trips", value));
+        final var producerRecord = spy(new ProducerRecord<String, TaxiTrip>("taxi-trips", value));
 
         final var sendResult = mock(SendResult.class);
 
@@ -109,7 +111,7 @@ public class TaxiTripServiceTest {
                 .thenReturn(exceptionally);
 
 
-        final TripRequest tripRequest = TripRequest.builder()
+        final TaxiTrip tripRequest = TaxiTrip.builder()
                 .tPepDropOffDatetime(LocalDateTime.now())
                 .build();
         taxiTripService.pushTripToQueue(tripRequest);
