@@ -7,6 +7,8 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -15,9 +17,10 @@ public class TaxiTripService {
 
     @Transactional
     public void pushTripToQueue(final TaxiTrip data) {
-        final int dropOffYear = data.getTPepDropOffDatetime().getYear();
-        final int dropOffMonth = data.getTPepDropOffDatetime().getMonthValue();
-        final int dropOffDay = data.getTPepDropOffDatetime().getDayOfMonth();
+        final LocalDateTime dropOffDatetime = LocalDateTime.from(data.getTPepDropOffDatetime());
+        final int dropOffYear = dropOffDatetime.getYear();
+        final int dropOffMonth = dropOffDatetime.getMonthValue();
+        final int dropOffDay = dropOffDatetime.getDayOfMonth();
         data.setDropOffYear(dropOffYear);
         data.setDropOffMonth(dropOffMonth);
         data.setDropOffDay(dropOffDay);
