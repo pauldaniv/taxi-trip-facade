@@ -24,7 +24,7 @@ public class StatsService {
                                               final Integer day) {
         String key;
         String date;
-        if (day == -1) {
+        if (Optional.ofNullable(day).orElse(-1).equals(-1)) {
             key = String.format("%s", month);
             date = LocalDate.of(year, month, 1).format(DateTimeFormatter.ofPattern("yyyy-MM"));
         } else {

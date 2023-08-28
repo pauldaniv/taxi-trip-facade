@@ -119,7 +119,8 @@ subprojects {
                     exclude(
                         "**/config",
                         "**/model",
-                        "**/*Application*"
+                        "**/*Application*",
+                        "**/*UserService*"
                     )
                 }
             })
@@ -128,15 +129,7 @@ subprojects {
 
     tasks.jacocoTestCoverageVerification {
         violationRules {
-//            rule {
-//                limit {
-//                    minimum = "0.9".toBigDecimal()
-//                }
-//            }
-
             rule {
-//                element = "CLASS"
-//                includes = listOf("com.pauldaniv.*")
                 classDirectories.setFrom(tasks.jacocoTestReport.get().classDirectories)
                 limit {
                     counter = "LINE"

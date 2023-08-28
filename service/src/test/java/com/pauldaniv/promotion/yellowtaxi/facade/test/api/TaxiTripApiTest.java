@@ -3,6 +3,8 @@ package com.pauldaniv.promotion.yellowtaxi.facade.test.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pauldaniv.promotion.yellowtaxi.facade.controller.TaxiTripController;
 import com.pauldaniv.promotion.yellowtaxi.facade.model.TotalsResponse;
+import com.pauldaniv.promotion.yellowtaxi.facade.model.User;
+import com.pauldaniv.promotion.yellowtaxi.facade.model.UserRole;
 import com.pauldaniv.promotion.yellowtaxi.facade.service.StatsService;
 import com.pauldaniv.promotion.yellowtaxi.facade.service.TaxiTripService;
 import com.pauldaniv.promotion.yellowtaxi.model.TaxiTrip;
@@ -18,6 +20,7 @@ import org.testng.annotations.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Set;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.any;
@@ -57,7 +60,11 @@ public class TaxiTripApiTest {
 
         mockMvc.perform(post("/v1/trips")
                         .content(new ObjectMapper().writeValueAsBytes(requestBody))
-                        .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .principal(User.builder()
+                                .authorities(Set.of(UserRole.USER))
+                                .email("pavlo.daniv+driver@sombrainc.com")
+                                .build()))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("ok")));
 

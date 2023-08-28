@@ -14,6 +14,8 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class StatsServiceTest {
 
@@ -31,6 +33,31 @@ public class StatsServiceTest {
     @Test
     void getsStats() {
         assertThat(statsService.calculateTripTotals(2018, 2, 2)).isNotNull();
+    }
+
+    @Test
+    void getsStatsForMonth() {
+        assertThat(statsService.calculateTripTotals(2018, 2, null)).isNotNull();
+    }
+
+    @Test
+    void getsStatsFromRedisByMonth() {
+        when(jedisPooled.get("2")).thenReturn("123");
+        when(jedisPooled.get("3")).thenReturn(null);
+        assertThat(statsService.calculateTripTotals(2018, 2, null).getTotal()).isEqualTo("123");
+        assertThat(statsService.calculateTripTotals(2018, 3, null).getTotal()).isZero();
+        verify(jedisPooled).get("2");
+        verify(jedisPooled).get("3");
+    }
+
+    @Test
+    void getsStatsFromRedisByDay() {
+        when(jedisPooled.get("2/3")).thenReturn("123");
+        when(jedisPooled.get("3/3")).thenReturn(null);
+        assertThat(statsService.calculateTripTotals(2018, 2, 3).getTotal()).isEqualTo("123");
+        assertThat(statsService.calculateTripTotals(2018, 3, 3).getTotal()).isZero();
+        verify(jedisPooled).get("2/3");
+        verify(jedisPooled).get("3/3");
     }
 
     @AfterMethod

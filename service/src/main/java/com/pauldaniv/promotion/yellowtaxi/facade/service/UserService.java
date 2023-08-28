@@ -28,9 +28,9 @@ public class UserService {
                 .password("$2a$10$l1h14dP0h47egIDrY9epEux/t1V0hcXT93AJBgl.P9Jtnbro7nziq")
                 .authorities(Set.of(UserRole.ANALYST))
                 .build());
-        users.put("pavlo.daniv+us@sombrainc.com", User.builder()
-                .id("ro-user")
-                .email("pavlo.daniv+us@sombrainc.com")
+        users.put("pavlo.daniv+driver@sombrainc.com", User.builder()
+                .id("driver")
+                .email("pavlo.daniv+driver@sombrainc.com")
                 .password("$2a$10$l1h14dP0h47egIDrY9epEux/t1V0hcXT93AJBgl.P9Jtnbro7nziq")
                 .authorities(Set.of(UserRole.USER))
                 .build());
