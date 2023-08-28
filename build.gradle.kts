@@ -104,6 +104,14 @@ subprojects {
         dependsOn(tasks.test) // tests are required to run before generating the report
     }
 
+    tasks.jacocoTestReport {
+        reports {
+            xml.required.set(false)
+            csv.required.set(false)
+            html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
+        }
+    }
+
     tasks.withType<JacocoReport> {
         afterEvaluate {
             classDirectories.setFrom(classDirectories.files.map {
