@@ -19,7 +19,7 @@ val codeArtifactPassword: String? = System.getenv("CODEARTIFACT_AUTH_TOKEN")
 
 subprojects {
     group = "com.pauldaniv.promotion.yellowtaxi.facade"
-    version = "0.0.1-SNAPSHOT"
+    version = "0.0.2-SNAPSHOT"
 
     apply(plugin = "idea")
     apply(plugin = "java")
