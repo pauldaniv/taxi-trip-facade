@@ -46,12 +46,12 @@ jobs:
         with:
           java-version: 17
           distribution: 'temurin'
-      - name: Run Build
-        run: ci build
       - name: Run Tests
         run: ci test
       - name: Run Test Coverage Check
         run: ci test_coverage_check
+      - name: Run Build
+        run: ci build
       - name: Publish artifacts
         if: github.ref == 'refs/heads/main'
         run: ci publish
